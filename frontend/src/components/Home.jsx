@@ -8,8 +8,21 @@ export default function Home() {
   useEffect(() => {
     const loadImages = async () => {
       try {
-        const images = await fetchImages('nature');
-        setImages(images);
+        const unsplashImages = await fetchImages('nature', 3);
+        
+        // Get a random AI-generated image from public folder
+        const aiImageNumber = Math.floor(Math.random() * 5) + 1; // Assuming you have 5 AI images
+        const aiImage = {
+          id: 'ai-generated',
+          urls: { regular: `/ai-image-${aiImageNumber}.jpg` },
+          alt_description: 'AI-generated image'
+        };
+
+        // Combine Unsplash images with AI image and shuffle
+        const allImages = [...unsplashImages, aiImage];
+        const shuffledImages = allImages.sort(() => Math.random() - 0.5);
+
+        setImages(shuffledImages);
       } catch (error) {
         console.error('Error fetching images:', error);
       } finally {
@@ -37,4 +50,3 @@ export default function Home() {
     </div>
   );
 }
-
