@@ -24,7 +24,7 @@ export default function Home() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
+    <div className="grid grid-cols-2 gap-4 p-4 h-screen">
       {images.map((image) => (
         <div key={image.id} className="overflow-hidden rounded-lg shadow-lg">
           <img
